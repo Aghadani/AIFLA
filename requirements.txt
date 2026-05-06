@@ -1,6 +1,7 @@
-streamlit==1.33.0
+streamlit>=1.35.0
 numpy
 matplotlib
 scikit-learn
 scipy
 pandas
+pillow>=10.4.0
