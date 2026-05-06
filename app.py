@@ -226,6 +226,7 @@ with st.sidebar:
         "🟡 L4 — Prompt Engineering":    ("L4", "#fbbf24"),
         "🟠 L5 — RAG Pipeline":          ("L5", "#f97316"),
         "🔴 L6 — Agentic Workflows":     ("L6", "#f43f5e"),
+        "⚪ L7 — HTML / CSS / JS Lab":   ("L7", "#e2e8f0"),
     }
 
     selected = st.radio(
@@ -259,7 +260,7 @@ if level_code == "L1":
     st.markdown("""
     <div class='concept-box'>
         <h4>What is a Neural Network?</h4>
-        <p>A neural network learns a <b>decision boundary</b> an invisible line that separates different classes.
+        <p>A neural network learns a <b>decision boundary</b> — an invisible line that separates different classes.
         Adjust the settings below and watch how the network learns to tell two groups apart.
         More hidden neurons = more complex boundary it can draw.</p>
     </div>
@@ -280,7 +281,7 @@ if level_code == "L1":
         st.markdown("""
         <div class='concept-box' style='margin-top:16px;'>
             <h4>💡 Try This</h4>
-            <p>Set dataset to <b>Circles</b> with only <b>2 neurons</b> it can't separate them!
+            <p>Set dataset to <b>Circles</b> with only <b>2 neurons</b> — it can't separate them!
             Now increase to <b>8</b> and watch the boundary curve.</p>
         </div>
         """, unsafe_allow_html=True)
@@ -383,7 +384,7 @@ elif level_code == "L2":
     <div class='concept-box'>
         <h4>Why Does Data Quality Matter?</h4>
         <p>AI models are only as good as the data they learn from. If training data is <b>imbalanced</b>,
-        <b>noisy</b>, or <b>unrepresentative</b>, the model will be biased even if accuracy looks high.
+        <b>noisy</b>, or <b>unrepresentative</b>, the model will be biased — even if accuracy looks high.
         Experiment below to see how bad data creates biased AI.</p>
     </div>
     """, unsafe_allow_html=True)
@@ -398,13 +399,13 @@ elif level_code == "L2":
                                 help="Percentage of labels randomly flipped (bad labelling)")
         n_total = st.slider("Dataset Size", 100, 1000, 300)
         feature_bias = st.slider("Feature Bias", 0.0, 2.0, 0.0,
-                                 help="Shift Class A features simulates demographic skew")
+                                 help="Shift Class A features — simulates demographic skew")
 
         st.markdown("""
         <div class='concept-box' style='margin-top:16px;'>
             <h4>💡 Key Insight</h4>
             <p>Push <b>Class Imbalance to 90%</b>. The accuracy stays high but the model
-            just predicts Class A for everything Class B is completely ignored!</p>
+            just predicts Class A for everything — Class B is completely ignored!</p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -464,7 +465,7 @@ elif level_code == "L2":
 
         bias_gap = abs(acc_a - acc_b)
         if bias_gap > 0.3:
-            st.error(f"⚠️ High bias detected! Class accuracy gap: {bias_gap:.0%} your model discriminates between groups.")
+            st.error(f"⚠️ High bias detected! Class accuracy gap: {bias_gap:.0%} — your model discriminates between groups.")
         elif bias_gap > 0.1:
             st.warning(f"⚠️ Moderate bias. Accuracy gap between classes: {bias_gap:.0%}")
         else:
@@ -495,7 +496,7 @@ elif level_code == "L3":
     <div class='concept-box'>
         <h4>What Do CNN Filters Actually See?</h4>
         <p>Convolutional Neural Networks use <b>filters (kernels)</b> that slide across an image
-        looking for specific patterns edges, corners, textures. Each filter produces a
+        looking for specific patterns — edges, corners, textures. Each filter produces a
         <b>feature map</b> showing where that pattern appears. This is how CNNs "understand" images.</p>
     </div>
     """, unsafe_allow_html=True)
@@ -520,7 +521,7 @@ elif level_code == "L3":
         <div class='concept-box' style='margin-top:16px;'>
             <h4>💡 Try This</h4>
             <p>Switch between <b>Sobel X</b> and <b>Sobel Y</b>. One detects vertical edges,
-            the other horizontal together they form the full edge map used in early CNN layers.</p>
+            the other horizontal — together they form the full edge map used in early CNN layers.</p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -720,7 +721,7 @@ elif level_code == "L5":
     <div class='concept-box'>
         <h4>What is Retrieval-Augmented Generation (RAG)?</h4>
         <p>RAG solves a core LLM problem: models don't know facts outside their training data.
-        RAG adds a <b>retrieval step</b> before generating, the system searches a knowledge base
+        RAG adds a <b>retrieval step</b> — before generating, the system searches a knowledge base
         for relevant documents and adds them to the prompt. This grounds the model in real facts.</p>
     </div>
     """, unsafe_allow_html=True)
@@ -993,3 +994,844 @@ elif level_code == "L6":
         cols[1].metric("Edges", len(edges))
         feedback_loops = sum(1 for s, d in edges if nodes.index(d) < nodes.index(s))
         cols[2].metric("Feedback Loops", feedback_loops)
+
+
+# ════════════════════════════════════════════════════════════
+# L7 — HTML / CSS / JS Interactive Lab
+# ════════════════════════════════════════════════════════════
+elif level_code == "L7":
+
+    st.markdown("""
+    <div class='tool-header'>
+        <span class='tool-badge'>LEVEL 7</span>
+        <span style='font-size:1.5rem; font-weight:800; color:#e2e8f0;'>🌐 HTML / CSS / JS Lab</span>
+    </div>
+    <div class='concept-box'>
+        <h4>Learn Web Technologies Interactively</h4>
+        <p>Three hands-on tools to understand the building blocks of the web.
+        See how <b>HTML</b> structures content, <b>CSS</b> styles it, and
+        <b>JavaScript</b> makes it interactive — all live in your browser.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    sub_tool = st.selectbox(
+        "Choose a topic",
+        ["🏗️ HTML Structure Explorer", "🎨 CSS Properties Playground", "⚡ JS Concepts Visualizer"],
+        label_visibility="visible"
+    )
+
+    # ── SUB-TOOL 1: HTML Structure Explorer ─────────────────
+    if "HTML" in sub_tool:
+
+        st.markdown("""
+        <div class='concept-box'>
+            <h4>What is HTML?</h4>
+            <p>HTML (HyperText Markup Language) uses <b>tags</b> to give structure to content.
+            Every webpage is a tree of nested elements — called the <b>DOM (Document Object Model)</b>.
+            Pick an element below to see its tag, purpose, and live preview.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        col1, col2 = st.columns([1, 1])
+
+        HTML_ELEMENTS = {
+            "Headings (h1–h6)": {
+                "tag": "<h1> to <h6>",
+                "purpose": "Define titles and subheadings. h1 is the most important, h6 the least.",
+                "category": "Text",
+                "preview": """<div style='font-family:sans-serif; padding:12px; background:#111827; border-radius:8px;'>
+<h1 style='color:#f8fafc;margin:4px 0;font-size:2rem'>Heading 1</h1>
+<h2 style='color:#cbd5e1;margin:4px 0;font-size:1.5rem'>Heading 2</h2>
+<h3 style='color:#94a3b8;margin:4px 0;font-size:1.25rem'>Heading 3</h3>
+<h4 style='color:#64748b;margin:4px 0;font-size:1rem'>Heading 4</h4>
+<h5 style='color:#475569;margin:4px 0;font-size:.85rem'>Heading 5</h5>
+<h6 style='color:#334155;margin:4px 0;font-size:.75rem'>Heading 6</h6>
+</div>""",
+                "code": "<h1>Main Title</h1>\n<h2>Section Title</h2>\n<h3>Subsection</h3>",
+                "dom_children": ["h1", "h2", "h3", "h4", "h5", "h6"],
+            },
+            "Paragraph & Text": {
+                "tag": "<p>, <span>, <strong>, <em>",
+                "purpose": "Paragraphs wrap blocks of text. Span wraps inline text. Strong = bold, em = italic.",
+                "category": "Text",
+                "preview": """<div style='font-family:sans-serif; padding:12px; background:#111827; border-radius:8px; color:#e2e8f0;'>
+<p>This is a <strong>paragraph</strong> with <em>italic</em> and <span style='color:#00d4ff'>colored span</span>.</p>
+<p style='color:#94a3b8;font-size:0.9rem'>A second paragraph — block-level, always starts on a new line.</p>
+</div>""",
+                "code": "<p>This is a <strong>bold</strong> and <em>italic</em> text.</p>\n<span style='color:red'>Inline span</span>",
+                "dom_children": ["p", "span", "strong", "em", "b", "i"],
+            },
+            "Lists (ul / ol)": {
+                "tag": "<ul>, <ol>, <li>",
+                "purpose": "ul = unordered (bullet) list. ol = ordered (numbered) list. li = list item.",
+                "category": "Structure",
+                "preview": """<div style='font-family:sans-serif; padding:12px; background:#111827; border-radius:8px; color:#e2e8f0; display:flex; gap:32px;'>
+<div><p style='color:#00d4ff;margin:0 0 6px'>Unordered</p><ul style='margin:0;padding-left:20px'><li>HTML</li><li>CSS</li><li>JavaScript</li></ul></div>
+<div><p style='color:#a78bfa;margin:0 0 6px'>Ordered</p><ol style='margin:0;padding-left:20px'><li>Learn HTML</li><li>Learn CSS</li><li>Build!</li></ol></div>
+</div>""",
+                "code": "<ul>\n  <li>Unordered item</li>\n  <li>Another item</li>\n</ul>\n\n<ol>\n  <li>Step one</li>\n  <li>Step two</li>\n</ol>",
+                "dom_children": ["ul", "ol", "li"],
+            },
+            "Links & Images": {
+                "tag": "<a>, <img>",
+                "purpose": "a creates clickable hyperlinks. img embeds images. Both use attributes (href, src, alt).",
+                "category": "Media",
+                "preview": """<div style='font-family:sans-serif; padding:12px; background:#111827; border-radius:8px; color:#e2e8f0;'>
+<a href='#' style='color:#00d4ff;text-decoration:none;'>🔗 This is a hyperlink</a>
+<br><br>
+<div style='width:80px;height:50px;background:#1e2d45;border:2px dashed #334155;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:#64748b;'>img placeholder</div>
+</div>""",
+                "code": '<a href="https://example.com">Visit Example</a>\n\n<img src="photo.jpg" alt="Description" width="200">',
+                "dom_children": ["a", "img"],
+            },
+            "Div & Semantic Tags": {
+                "tag": "<div>, <header>, <main>, <section>, <footer>",
+                "purpose": "div is a generic container. Semantic tags (header, main, footer) tell browsers AND developers what each section means.",
+                "category": "Structure",
+                "preview": """<div style='font-family:sans-serif; padding:8px; background:#111827; border-radius:8px; font-size:0.75rem;'>
+<div style='background:#164e63;border:1px solid #0e7490;border-radius:4px;padding:6px;margin:3px;color:#67e8f9;'>&lt;header&gt; — Logo, nav bar</div>
+<div style='background:#1e1b4b;border:1px solid #4338ca;border-radius:4px;padding:6px;margin:3px;color:#a5b4fc;'>&lt;main&gt;
+  <div style='background:#14532d;border:1px solid #166534;border-radius:3px;padding:4px;margin:3px;color:#86efac;'>&lt;section&gt; Content</div>
+</div>
+<div style='background:#3b0764;border:1px solid #7c3aed;border-radius:4px;padding:6px;margin:3px;color:#c4b5fd;'>&lt;footer&gt; — Copyright, links</div>
+</div>""",
+                "code": "<header>Logo and nav here</header>\n<main>\n  <section>Content here</section>\n</main>\n<footer>Footer here</footer>",
+                "dom_children": ["div", "header", "nav", "main", "section", "article", "aside", "footer"],
+            },
+            "Forms & Inputs": {
+                "tag": "<form>, <input>, <button>, <label>",
+                "purpose": "Forms collect user data. Inputs can be text, email, checkbox, radio. Always pair inputs with labels for accessibility.",
+                "category": "Interactive",
+                "preview": """<div style='font-family:sans-serif; padding:12px; background:#111827; border-radius:8px;'>
+<form style='display:flex;flex-direction:column;gap:8px;'>
+<label style='color:#94a3b8;font-size:0.8rem;'>Name</label>
+<input type='text' placeholder='Enter name...' style='padding:6px 10px;border-radius:4px;border:1px solid #334155;background:#1e2d45;color:#e2e8f0;font-size:0.85rem;'>
+<label style='color:#94a3b8;font-size:0.8rem;'>Email</label>
+<input type='email' placeholder='you@email.com' style='padding:6px 10px;border-radius:4px;border:1px solid #334155;background:#1e2d45;color:#e2e8f0;font-size:0.85rem;'>
+<button type='button' style='padding:7px;background:#0ea5e9;color:white;border:none;border-radius:4px;cursor:pointer;font-size:0.85rem;'>Submit</button>
+</form></div>""",
+                "code": '<form>\n  <label>Name:</label>\n  <input type="text" placeholder="Your name">\n  \n  <label>Email:</label>\n  <input type="email">\n  \n  <button type="submit">Send</button>\n</form>',
+                "dom_children": ["form", "input", "textarea", "select", "button", "label"],
+            },
+            "Table": {
+                "tag": "<table>, <tr>, <th>, <td>",
+                "purpose": "Tables display data in rows and columns. thead = header rows, tbody = data rows, tr = row, th = header cell, td = data cell.",
+                "category": "Data",
+                "preview": """<div style='padding:12px; background:#111827; border-radius:8px;'>
+<table style='border-collapse:collapse;width:100%;font-family:sans-serif;font-size:0.8rem;'>
+<thead><tr style='background:#1e2d45;'><th style='padding:6px 10px;color:#00d4ff;text-align:left;border:1px solid #334155;'>Name</th><th style='padding:6px 10px;color:#00d4ff;text-align:left;border:1px solid #334155;'>Score</th></tr></thead>
+<tbody>
+<tr><td style='padding:6px 10px;color:#e2e8f0;border:1px solid #1e2d45;'>Alice</td><td style='padding:6px 10px;color:#86efac;border:1px solid #1e2d45;'>98</td></tr>
+<tr style='background:#0d1220'><td style='padding:6px 10px;color:#e2e8f0;border:1px solid #1e2d45;'>Bob</td><td style='padding:6px 10px;color:#fcd34d;border:1px solid #1e2d45;'>74</td></tr>
+</tbody></table></div>""",
+                "code": "<table>\n  <thead>\n    <tr><th>Name</th><th>Score</th></tr>\n  </thead>\n  <tbody>\n    <tr><td>Alice</td><td>98</td></tr>\n    <tr><td>Bob</td><td>74</td></tr>\n  </tbody>\n</table>",
+                "dom_children": ["table", "thead", "tbody", "tr", "th", "td"],
+            },
+        }
+
+        with col1:
+            element = st.selectbox("Select HTML Element", list(HTML_ELEMENTS.keys()))
+            info = HTML_ELEMENTS[element]
+
+            st.markdown(f"""
+            <div class='concept-box'>
+                <h4>🏷️ Tag: <code style='background:#0d1220;padding:2px 6px;border-radius:4px;font-size:0.85rem'>{info['tag']}</code></h4>
+                <p>{info['purpose']}</p>
+                <p style='margin-top:8px;'><span style='background:#1e2d45;color:#a78bfa;padding:2px 8px;border-radius:12px;font-size:0.75rem;font-weight:600;'>Category: {info['category']}</span></p>
+            </div>
+            """, unsafe_allow_html=True)
+
+            st.markdown("#### 📝 Code")
+            st.code(info["code"], language="html")
+
+            st.markdown("#### 🌳 Child Tags")
+            tags_html = " ".join([
+                f"<code style='background:#1e2d45;color:#7dd3fc;padding:3px 8px;border-radius:6px;font-size:0.8rem;margin:2px;display:inline-block'>&lt;{t}&gt;</code>"
+                for t in info["dom_children"]
+            ])
+            st.markdown(tags_html, unsafe_allow_html=True)
+
+        with col2:
+            st.markdown("#### 👁️ Live Preview")
+            st.markdown(info["preview"], unsafe_allow_html=True)
+
+            st.markdown("#### 🌳 DOM Tree View")
+            dom_items = info["dom_children"]
+            tree_html = "<div style='background:#0d1220;border:1px solid #1e2d45;border-radius:10px;padding:14px;font-family:monospace;font-size:0.82rem;'>"
+            tree_html += f"<div style='color:#f472b6;'>📄 document</div>"
+            tree_html += f"<div style='color:#60a5fa;margin-left:16px;'>└─ &lt;html&gt;</div>"
+            tree_html += f"<div style='color:#34d399;margin-left:32px;'>└─ &lt;body&gt;</div>"
+            for i, tag in enumerate(dom_items[:5]):
+                prefix = "├─" if i < len(dom_items[:5]) - 1 else "└─"
+                tree_html += f"<div style='color:#fcd34d;margin-left:48px;'>{prefix} &lt;{tag}&gt;</div>"
+            tree_html += "</div>"
+            st.markdown(tree_html, unsafe_allow_html=True)
+
+            st.markdown("#### 🧩 Quick Quiz")
+            quiz_q = {
+                "Headings (h1–h6)": ("Which heading tag has the LOWEST visual importance?", "h6"),
+                "Paragraph & Text": ("Which tag makes text bold by default?", "strong"),
+                "Lists (ul / ol)": ("Which tag do you use for a numbered list?", "ol"),
+                "Links & Images": ("What attribute sets the URL for a link?", "href"),
+                "Div & Semantic Tags": ("What semantic tag wraps the main page content?", "main"),
+                "Forms & Inputs": ("What attribute makes a button submit the form?", "type='submit'"),
+                "Table": ("What tag defines a header cell in a table?", "th"),
+            }
+            q, ans = quiz_q[element]
+            st.markdown(f"<div style='color:#fcd34d;font-size:0.9rem;font-weight:600;margin-bottom:6px;'>❓ {q}</div>", unsafe_allow_html=True)
+            user_ans = st.text_input("Your answer", key=f"quiz_{element}", placeholder="Type tag name...")
+            if user_ans:
+                if user_ans.strip().lower().replace("<","").replace(">","") in ans.replace("<","").replace(">","").lower():
+                    st.success(f"✅ Correct! `<{ans}>` is right.")
+                else:
+                    st.error(f"❌ Not quite. The answer is `{ans}`.")
+
+    # ── SUB-TOOL 2: CSS Properties Playground ───────────────
+    elif "CSS" in sub_tool:
+
+        st.markdown("""
+        <div class='concept-box'>
+            <h4>What is CSS?</h4>
+            <p>CSS (Cascading Style Sheets) controls <b>how HTML elements look</b>. 
+            Each CSS rule has a <b>selector</b> (what to target) and <b>declarations</b> (property: value).
+            Use the sliders and pickers below to see CSS properties change in real time.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        css_topic = st.selectbox("CSS Topic", [
+            "Box Model", "Typography", "Colors & Backgrounds",
+            "Flexbox Layout", "CSS Selectors", "Transitions & Animation"
+        ])
+
+        col1, col2 = st.columns([1, 1])
+
+        if css_topic == "Box Model":
+            with col1:
+                st.markdown("#### 🎛️ Box Model Controls")
+                st.markdown("""<div class='concept-box'><h4>The Box Model</h4>
+                <p>Every HTML element is a box. From outside in: <b>Margin</b> (space outside) → <b>Border</b> → <b>Padding</b> (space inside) → <b>Content</b>.</p></div>""", unsafe_allow_html=True)
+                margin = st.slider("Margin (px)", 0, 40, 16)
+                border = st.slider("Border width (px)", 0, 10, 2)
+                padding = st.slider("Padding (px)", 0, 40, 16)
+                border_radius = st.slider("Border radius (px)", 0, 50, 8)
+                bg_color = st.color_picker("Background color", "#0ea5e9")
+                border_color = st.color_picker("Border color", "#ffffff")
+                st.code(f"""div {{
+  margin: {margin}px;
+  border: {border}px solid {border_color};
+  padding: {padding}px;
+  border-radius: {border_radius}px;
+  background-color: {bg_color};
+}}""", language="css")
+
+            with col2:
+                st.markdown("#### 👁️ Live Preview")
+                box_html = f"""
+                <div style='background:#0d1220;padding:30px;border-radius:12px;border:1px solid #1e2d45;display:flex;align-items:center;justify-content:center;min-height:260px;'>
+                  <div style='background:#1e2d45;padding:20px;border-radius:8px;font-size:0.75rem;color:#64748b;font-family:monospace;text-align:center;'>
+                    <span style='color:#f472b6'>MARGIN ({margin}px)</span>
+                    <div style='margin:{margin}px;background:#0f2744;padding:4px;border-radius:4px;'>
+                      <span style='color:#60a5fa'>BORDER ({border}px)</span>
+                      <div style='border:{border}px solid {border_color};background:{bg_color};padding:{padding}px;border-radius:{border_radius}px;margin:4px;'>
+                        <span style='color:#fff;font-weight:bold'>PADDING ({padding}px)</span>
+                        <div style='background:rgba(0,0,0,0.3);padding:8px;border-radius:4px;margin-top:4px;'>
+                          <span style='color:#fff;'>CONTENT</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>"""
+                st.markdown(box_html, unsafe_allow_html=True)
+
+        elif css_topic == "Typography":
+            with col1:
+                st.markdown("#### 🎛️ Typography Controls")
+                font_size = st.slider("font-size (px)", 10, 48, 18)
+                font_weight = st.select_slider("font-weight", options=[100,200,300,400,500,600,700,800,900], value=400)
+                line_height = st.slider("line-height", 1.0, 3.0, 1.6)
+                letter_spacing = st.slider("letter-spacing (px)", -2, 10, 0)
+                text_color = st.color_picker("color", "#e2e8f0")
+                text_align = st.selectbox("text-align", ["left","center","right","justify"])
+                text_transform = st.selectbox("text-transform", ["none","uppercase","lowercase","capitalize"])
+                st.code(f"""p {{
+  font-size: {font_size}px;
+  font-weight: {font_weight};
+  line-height: {line_height};
+  letter-spacing: {letter_spacing}px;
+  color: {text_color};
+  text-align: {text_align};
+  text-transform: {text_transform};
+}}""", language="css")
+
+            with col2:
+                st.markdown("#### 👁️ Live Preview")
+                typo_html = f"""<div style='background:#0d1220;padding:24px;border-radius:12px;border:1px solid #1e2d45;'>
+                <p style='font-size:{font_size}px;font-weight:{font_weight};line-height:{line_height};
+                letter-spacing:{letter_spacing}px;color:{text_color};text-align:{text_align};
+                text-transform:{text_transform};margin:0;'>
+                The quick brown fox jumps over the lazy dog. CSS controls every visual aspect of how text appears on the web.
+                </p></div>"""
+                st.markdown(typo_html, unsafe_allow_html=True)
+                st.markdown("""<div class='concept-box' style='margin-top:16px;'>
+                <h4>💡 Key Tip</h4>
+                <p>Use <b>line-height: 1.5–1.7</b> for body text — it dramatically improves readability.
+                Font sizes below 14px are hard to read on most screens.</p></div>""", unsafe_allow_html=True)
+
+        elif css_topic == "Colors & Backgrounds":
+            with col1:
+                st.markdown("#### 🎛️ Color Controls")
+                bg = st.color_picker("background-color", "#0d1220")
+                txt = st.color_picker("color (text)", "#e2e8f0")
+                opacity_val = st.slider("opacity", 0.1, 1.0, 1.0)
+                use_gradient = st.checkbox("Use gradient background")
+                grad_c1 = st.color_picker("Gradient color 1", "#0ea5e9") if use_gradient else "#0ea5e9"
+                grad_c2 = st.color_picker("Gradient color 2", "#a78bfa") if use_gradient else "#a78bfa"
+                grad_dir = st.selectbox("Gradient direction", ["to right","to bottom","135deg","45deg"]) if use_gradient else "to right"
+                bg_style = f"linear-gradient({grad_dir}, {grad_c1}, {grad_c2})" if use_gradient else bg
+                st.code(f"""div {{
+  background: {bg_style};
+  color: {txt};
+  opacity: {opacity_val};
+}}""", language="css")
+
+            with col2:
+                st.markdown("#### 👁️ Live Preview")
+                color_html = f"""<div style='background:{bg_style};color:{txt};opacity:{opacity_val};
+                padding:24px;border-radius:12px;border:1px solid #1e2d45;'>
+                <h3 style='color:{txt};margin:0 0 8px;'>Sample Card</h3>
+                <p style='color:{txt};opacity:0.85;margin:0;line-height:1.6;'>
+                This text shows how your color choices look together. Good contrast between
+                background and text is essential for readability and accessibility.</p>
+                <div style='margin-top:12px;background:rgba(255,255,255,0.1);padding:8px 12px;border-radius:6px;font-size:0.85rem;'>
+                Nested element</div></div>"""
+                st.markdown(color_html, unsafe_allow_html=True)
+
+        elif css_topic == "Flexbox Layout":
+            with col1:
+                st.markdown("#### 🎛️ Flexbox Controls")
+                st.markdown("""<div class='concept-box'><h4>Flexbox</h4>
+                <p>Flexbox arranges items in a row or column. The parent gets <code>display:flex</code> and controls alignment. Children grow or shrink to fill space.</p></div>""", unsafe_allow_html=True)
+                flex_dir = st.selectbox("flex-direction", ["row","column","row-reverse","column-reverse"])
+                justify = st.selectbox("justify-content", ["flex-start","center","flex-end","space-between","space-around","space-evenly"])
+                align = st.selectbox("align-items", ["stretch","flex-start","center","flex-end"])
+                gap_val = st.slider("gap (px)", 0, 40, 12)
+                n_items = st.slider("Number of items", 2, 6, 3)
+                st.code(f""".container {{
+  display: flex;
+  flex-direction: {flex_dir};
+  justify-content: {justify};
+  align-items: {align};
+  gap: {gap_val}px;
+}}""", language="css")
+
+            with col2:
+                st.markdown("#### 👁️ Live Preview")
+                items_html = "".join([
+                    f"<div style='background:linear-gradient(135deg,#0ea5e9,#6366f1);color:white;padding:12px 16px;border-radius:8px;font-weight:600;font-size:0.85rem;'>Item {i+1}</div>"
+                    for i in range(n_items)
+                ])
+                flex_html = f"""<div style='background:#0d1220;padding:20px;border-radius:12px;border:1px solid #1e2d45;min-height:180px;'>
+                <div style='display:flex;flex-direction:{flex_dir};justify-content:{justify};align-items:{align};gap:{gap_val}px;min-height:140px;background:#080c14;border-radius:8px;padding:12px;'>
+                {items_html}</div></div>"""
+                st.markdown(flex_html, unsafe_allow_html=True)
+
+        elif css_topic == "CSS Selectors":
+            with col1:
+                st.markdown("#### 🎯 Selector Types")
+                st.markdown("""<div class='concept-box'><h4>How Selectors Work</h4>
+                <p>Selectors tell CSS <b>which elements to style</b>. They range from simple (tag name) to powerful (combinations and pseudo-classes).</p></div>""", unsafe_allow_html=True)
+                sel_type = st.radio("Selector type", [
+                    "Element selector",
+                    "Class selector (.class)",
+                    "ID selector (#id)",
+                    "Descendant selector",
+                    "Pseudo-class (:hover)",
+                    "Pseudo-element (::before)",
+                ], label_visibility="collapsed")
+
+                SEL_INFO = {
+                    "Element selector": {
+                        "syntax": "p { color: red; }",
+                        "targets": "All <p> elements on the page",
+                        "specificity": "0,0,1 — lowest priority",
+                        "tip": "Avoid overusing element selectors — they affect everything globally."
+                    },
+                    "Class selector (.class)": {
+                        "syntax": ".highlight { background: yellow; }",
+                        "targets": 'All elements with class="highlight"',
+                        "specificity": "0,1,0 — medium priority",
+                        "tip": "Classes are reusable — the most common selector in real projects."
+                    },
+                    "ID selector (#id)": {
+                        "syntax": "#header { font-size: 2rem; }",
+                        "targets": 'Only the element with id="header"',
+                        "specificity": "1,0,0 — high priority",
+                        "tip": "IDs should be unique per page. Prefer classes for styling."
+                    },
+                    "Descendant selector": {
+                        "syntax": "nav a { color: white; }",
+                        "targets": "All <a> tags inside any <nav>",
+                        "specificity": "0,0,2 — combined",
+                        "tip": "Target elements based on their parent context without adding classes."
+                    },
+                    "Pseudo-class (:hover)": {
+                        "syntax": "button:hover { background: blue; }",
+                        "targets": "button when the mouse is over it",
+                        "specificity": "0,1,1 — same as class+element",
+                        "tip": "Also :focus, :active, :nth-child(n), :first-child, :last-child."
+                    },
+                    "Pseudo-element (::before)": {
+                        "syntax": 'p::before { content: "→ "; }',
+                        "targets": "A virtual element inserted before <p> content",
+                        "specificity": "0,0,1 — same as element",
+                        "tip": "::before and ::after require content: ''. Great for decorations without extra HTML."
+                    },
+                }
+                info = SEL_INFO[sel_type]
+                st.code(info["syntax"], language="css")
+                st.markdown(f"""<div class='concept-box'>
+                <h4>🎯 Targets</h4><p>{info['targets']}</p>
+                <h4 style='margin-top:10px;'>📊 Specificity</h4><p>{info['specificity']}</p>
+                <h4 style='margin-top:10px;'>💡 Tip</h4><p>{info['tip']}</p>
+                </div>""", unsafe_allow_html=True)
+
+            with col2:
+                st.markdown("#### 📊 Specificity Calculator")
+                st.markdown("""<div class='concept-box'><h4>The Specificity Hierarchy</h4>
+                <p>When two rules target the same element, the one with higher specificity wins.
+                <b>Inline styles</b> beat IDs, IDs beat classes, classes beat elements.</p></div>""", unsafe_allow_html=True)
+
+                import matplotlib.pyplot as plt, matplotlib
+                matplotlib.use("Agg")
+                fig, ax = plt.subplots(figsize=(5, 3))
+                fig.patch.set_facecolor('#0d1220')
+                ax.set_facecolor('#080c14')
+                categories = ['!important', 'Inline\nstyle', 'ID\n(#id)', 'Class\n(.class)', 'Element\n(p, div)']
+                values = [10000, 1000, 100, 10, 1]
+                colors = ['#f43f5e','#f97316','#fbbf24','#0ea5e9','#22c55e']
+                bars = ax.barh(categories, values, color=colors, alpha=0.85)
+                ax.set_xscale('log')
+                ax.set_title("Specificity Weight (log scale)", color='#e2e8f0', fontsize=10)
+                ax.tick_params(colors='#94a3b8', labelsize=9)
+                for spine in ax.spines.values(): spine.set_edgecolor('#1e2d45')
+                for bar, val in zip(bars, values):
+                    ax.text(val * 1.3, bar.get_y() + bar.get_height()/2,
+                            str(val), va='center', color='#e2e8f0', fontsize=8)
+                plt.tight_layout()
+                st.pyplot(fig)
+                plt.close()
+
+        elif css_topic == "Transitions & Animation":
+            with col1:
+                st.markdown("#### 🎛️ Animation Controls")
+                st.markdown("""<div class='concept-box'><h4>CSS Transitions & Animations</h4>
+                <p><b>Transitions</b> smoothly change a property when a state changes (like :hover).
+                <b>Animations</b> run automatically using @keyframes.</p></div>""", unsafe_allow_html=True)
+                anim_type = st.selectbox("Effect type", ["Fade In","Slide In","Pulse","Rotate","Bounce","Color Shift"])
+                duration = st.slider("Duration (seconds)", 0.1, 3.0, 0.6)
+                timing = st.selectbox("Timing function", ["ease","linear","ease-in","ease-out","ease-in-out"])
+
+                ANIM_CODE = {
+                    "Fade In":     f"@keyframes fadeIn {{\n  from {{ opacity: 0; }}\n  to {{ opacity: 1; }}\n}}\n.box {{\n  animation: fadeIn {duration}s {timing};\n}}",
+                    "Slide In":    f"@keyframes slideIn {{\n  from {{ transform: translateX(-50px); opacity: 0; }}\n  to {{ transform: translateX(0); opacity: 1; }}\n}}\n.box {{\n  animation: slideIn {duration}s {timing};\n}}",
+                    "Pulse":       f"@keyframes pulse {{\n  0%, 100% {{ transform: scale(1); }}\n  50% {{ transform: scale(1.15); }}\n}}\n.box {{\n  animation: pulse {duration}s {timing} infinite;\n}}",
+                    "Rotate":      f"@keyframes rotate {{\n  from {{ transform: rotate(0deg); }}\n  to {{ transform: rotate(360deg); }}\n}}\n.box {{\n  animation: rotate {duration}s {timing} infinite;\n}}",
+                    "Bounce":      f"@keyframes bounce {{\n  0%, 100% {{ transform: translateY(0); }}\n  50% {{ transform: translateY(-20px); }}\n}}\n.box {{\n  animation: bounce {duration}s {timing} infinite;\n}}",
+                    "Color Shift": f"@keyframes colorShift {{\n  0% {{ background: #0ea5e9; }}\n  50% {{ background: #a78bfa; }}\n  100% {{ background: #f472b6; }}\n}}\n.box {{\n  animation: colorShift {duration}s {timing} infinite;\n}}",
+                }
+                st.code(ANIM_CODE[anim_type], language="css")
+
+            with col2:
+                st.markdown("#### 👁️ Live Preview")
+                ANIM_STYLES = {
+                    "Fade In":     f"animation:fadeIn {duration}s {timing};@keyframes fadeIn{{from{{opacity:0}}to{{opacity:1}}}}",
+                    "Slide In":    f"animation:slideIn {duration}s {timing};",
+                    "Pulse":       f"animation:pulse {duration}s {timing} infinite;",
+                    "Rotate":      f"animation:rotate {duration}s {timing} infinite;",
+                    "Bounce":      f"animation:bounce {duration}s {timing} infinite;",
+                    "Color Shift": f"animation:colorShift {duration}s {timing} infinite;",
+                }
+                anim_html = f"""
+                <style>
+                @keyframes fadeIn{{from{{opacity:0}}to{{opacity:1}}}}
+                @keyframes slideIn{{from{{transform:translateX(-50px);opacity:0}}to{{transform:translateX(0);opacity:1}}}}
+                @keyframes pulse{{0%,100%{{transform:scale(1)}}50%{{transform:scale(1.15)}}}}
+                @keyframes rotate{{from{{transform:rotate(0deg)}}to{{transform:rotate(360deg)}}}}
+                @keyframes bounce{{0%,100%{{transform:translateY(0)}}50%{{transform:translateY(-20px)}}}}
+                @keyframes colorShift{{0%{{background:#0ea5e9}}50%{{background:#a78bfa}}100%{{background:#f472b6}}}}
+                </style>
+                <div style='background:#0d1220;padding:30px;border-radius:12px;border:1px solid #1e2d45;display:flex;align-items:center;justify-content:center;min-height:160px;'>
+                  <div style='width:80px;height:80px;background:linear-gradient(135deg,#0ea5e9,#6366f1);border-radius:12px;
+                  {ANIM_STYLES[anim_type]}'></div>
+                </div>"""
+                st.markdown(anim_html, unsafe_allow_html=True)
+                st.markdown("""<div class='concept-box' style='margin-top:12px;'>
+                <h4>💡 Performance Tip</h4>
+                <p>Animate only <code>transform</code> and <code>opacity</code> for smooth 60fps animations.
+                Animating <code>width</code>, <code>height</code>, or <code>margin</code> forces layout recalculations — very slow.</p>
+                </div>""", unsafe_allow_html=True)
+
+    # ── SUB-TOOL 3: JS Concepts Visualizer ──────────────────
+    elif "JS" in sub_tool:
+
+        st.markdown("""
+        <div class='concept-box'>
+            <h4>What is JavaScript?</h4>
+            <p>JavaScript makes webpages <b>interactive and dynamic</b>. It runs in the browser and can
+            respond to user actions, manipulate HTML, fetch data, and compute logic in real time.
+            Pick a concept below to see it explained and visualized.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        import matplotlib
+        matplotlib.use("Agg")
+
+        js_topic = st.selectbox("JS Topic", [
+            "Variables & Data Types",
+            "Functions & Scope",
+            "Arrays & Methods",
+            "DOM Manipulation",
+            "Events & Callbacks",
+            "Promises & Async/Await",
+            "Objects & Classes",
+        ])
+
+        col1, col2 = st.columns([1, 1])
+
+        JS_CONTENT = {
+            "Variables & Data Types": {
+                "concept": "JavaScript has 3 ways to declare variables: <b>var</b> (old, function-scoped), <b>let</b> (block-scoped, reassignable), and <b>const</b> (block-scoped, not reassignable). Data types include strings, numbers, booleans, null, undefined, objects, and arrays.",
+                "code": """// Variable declarations
+const name = "Alice";      // string
+let age = 25;              // number
+let isStudent = true;      // boolean
+let nothing = null;        // null (intentionally empty)
+let notDefined;            // undefined
+
+// Type checking
+console.log(typeof name);       // "string"
+console.log(typeof age);        // "number"
+console.log(typeof isStudent);  // "boolean"
+
+// Template literals (modern string)
+console.log(`Hi, I'm ${name}, age ${age}`);""",
+                "quiz": ("What keyword declares a variable that CANNOT be reassigned?", "const"),
+                "viz_type": "table"
+            },
+            "Functions & Scope": {
+                "concept": "Functions are reusable blocks of code. <b>Scope</b> determines where variables are accessible. Variables declared inside a function are local to it — they can't be accessed outside.",
+                "code": """// Function declaration
+function greet(name) {
+  const message = "Hello, " + name; // local scope
+  return message;
+}
+
+// Arrow function (modern syntax)
+const square = (n) => n * n;
+
+// Scope example
+let globalVar = "I'm global";
+
+function test() {
+  let localVar = "I'm local";
+  console.log(globalVar); // ✅ works
+  console.log(localVar);  // ✅ works
+}
+// console.log(localVar); // ❌ ReferenceError!""",
+                "quiz": ("What is a variable that is only accessible inside the function that created it?", "local"),
+                "viz_type": "scope"
+            },
+            "Arrays & Methods": {
+                "concept": "Arrays store ordered lists of values. JavaScript provides powerful <b>higher-order array methods</b> like <code>map()</code>, <code>filter()</code>, and <code>reduce()</code> that transform arrays without loops.",
+                "code": """const scores = [45, 82, 91, 37, 76, 88];
+
+// .filter() — keep items matching condition
+const passing = scores.filter(s => s >= 60);
+// [82, 91, 76, 88]
+
+// .map() — transform every item
+const doubled = scores.map(s => s * 2);
+// [90, 164, 182, 74, 152, 176]
+
+// .reduce() — combine into single value
+const total = scores.reduce((sum, s) => sum + s, 0);
+// 419
+
+// .sort() — sort in place
+const sorted = [...scores].sort((a, b) => a - b);
+// [37, 45, 76, 82, 88, 91]""",
+                "quiz": ("Which array method returns a NEW array with only items that pass a test?", "filter"),
+                "viz_type": "array"
+            },
+            "DOM Manipulation": {
+                "concept": "The DOM (Document Object Model) is the browser's live tree of HTML elements. JavaScript can <b>select</b>, <b>modify</b>, <b>create</b>, and <b>delete</b> elements dynamically — without reloading the page.",
+                "code": """// Select elements
+const btn = document.getElementById("myBtn");
+const items = document.querySelectorAll(".item");
+
+// Change content & style
+btn.textContent = "Click Me!";
+btn.style.backgroundColor = "blue";
+
+// Create & add new element
+const newDiv = document.createElement("div");
+newDiv.className = "card";
+newDiv.textContent = "New card!";
+document.body.appendChild(newDiv);
+
+// Remove element
+const old = document.querySelector(".old");
+old.remove();
+
+// Toggle CSS class
+btn.classList.toggle("active");""",
+                "quiz": ("Which method selects the first element matching a CSS selector?", "querySelector"),
+                "viz_type": "dom"
+            },
+            "Events & Callbacks": {
+                "concept": "Events are actions that happen in the browser — clicks, keypresses, form submissions. You <b>listen</b> for events with <code>addEventListener</code> and pass a <b>callback function</b> that runs when the event fires.",
+                "code": """const button = document.getElementById("btn");
+
+// Add event listener
+button.addEventListener("click", function(event) {
+  console.log("Button clicked!", event.target);
+  event.target.style.color = "red";
+});
+
+// Arrow function callback
+document.addEventListener("keydown", (e) => {
+  console.log("Key pressed:", e.key);
+});
+
+// Common events:
+// click, dblclick, mouseover, mouseout
+// keydown, keyup, keypress
+// submit, change, input, focus, blur
+// scroll, resize, load""",
+                "quiz": ("What method is used to attach an event listener to an element?", "addEventListener"),
+                "viz_type": "events"
+            },
+            "Promises & Async/Await": {
+                "concept": "JavaScript is <b>single-threaded</b> but handles async operations (fetching data, timers) using Promises. <code>async/await</code> is modern syntax that makes async code read like synchronous code.",
+                "code": """// Old way — callback hell
+fetch(url, function(data) {
+  parse(data, function(parsed) {
+    display(parsed);
+  });
+});
+
+// Better — Promises
+fetch("https://api.example.com/data")
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+
+// Best — async/await
+async function loadData() {
+  try {
+    const response = await fetch("https://api.example.com/data");
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error("Failed:", error);
+  }
+}""",
+                "quiz": ("What keyword pauses async function execution until a Promise resolves?", "await"),
+                "viz_type": "async"
+            },
+            "Objects & Classes": {
+                "concept": "Objects group related data and functions together. <b>Classes</b> (ES6+) are blueprints for creating objects — they have <b>constructors</b>, <b>properties</b>, and <b>methods</b>, and support <b>inheritance</b>.",
+                "code": """// Object literal
+const student = {
+  name: "Ali",
+  grade: 90,
+  greet() {
+    return `Hi, I'm ${this.name}`;
+  }
+};
+
+// Class
+class Animal {
+  constructor(name, sound) {
+    this.name = name;
+    this.sound = sound;
+  }
+  speak() {
+    return `${this.name} says ${this.sound}!`;
+  }
+}
+
+// Inheritance
+class Dog extends Animal {
+  constructor(name) {
+    super(name, "Woof");
+  }
+  fetch() { return `${this.name} fetches the ball!`; }
+}
+
+const rex = new Dog("Rex");
+rex.speak();  // "Rex says Woof!"
+rex.fetch();  // "Rex fetches the ball!" """,
+                "quiz": ("What keyword is used to inherit from a parent class?", "extends"),
+                "viz_type": "class"
+            }
+        }
+
+        content = JS_CONTENT[js_topic]
+
+        with col1:
+            st.markdown(f"""<div class='concept-box'>
+            <h4>📖 {js_topic}</h4>
+            <p>{content['concept']}</p></div>""", unsafe_allow_html=True)
+            st.markdown("#### 📝 Code Example")
+            st.code(content["code"], language="javascript")
+
+        with col2:
+            st.markdown("#### 📊 Visualization")
+
+            if content["viz_type"] == "table":
+                fig, ax = plt.subplots(figsize=(5, 3))
+                fig.patch.set_facecolor('#0d1220')
+                ax.set_facecolor('#0d1220')
+                ax.axis('off')
+                rows = [["const", "Block", "❌ No", "#f43f5e"],
+                        ["let",   "Block", "✅ Yes", "#fbbf24"],
+                        ["var",   "Function","✅ Yes","#64748b"]]
+                headers = ["Keyword","Scope","Reassignable",""]
+                for i, row in enumerate(rows):
+                    for j, val in enumerate(row[:3]):
+                        ax.text(j*0.33+0.05, 0.75 - i*0.25, val,
+                               color=row[3], fontsize=11, va='center',
+                               fontfamily='monospace' if j==0 else 'sans-serif')
+                for j, h in enumerate(headers[:3]):
+                    ax.text(j*0.33+0.05, 1.0, h, color='#94a3b8', fontsize=9,
+                           va='center', fontweight='bold')
+                ax.axhline(0.88, color='#1e2d45', linewidth=1)
+                ax.set_xlim(0,1); ax.set_ylim(0,1.1)
+                ax.set_title("Variable Keyword Comparison", color='#e2e8f0', fontsize=10)
+                plt.tight_layout()
+                st.pyplot(fig); plt.close()
+
+            elif content["viz_type"] == "array":
+                scores = [45, 82, 91, 37, 76, 88]
+                passing = [s for s in scores if s >= 60]
+                fig, axes = plt.subplots(1, 2, figsize=(6, 3))
+                fig.patch.set_facecolor('#0d1220')
+                colors_all = ['#f43f5e' if s < 60 else '#22c55e' for s in scores]
+                for ax in axes: ax.set_facecolor('#0d1220'); ax.tick_params(colors='#94a3b8')
+                for spine in axes[0].spines.values(): spine.set_edgecolor('#1e2d45')
+                for spine in axes[1].spines.values(): spine.set_edgecolor('#1e2d45')
+                axes[0].bar(range(len(scores)), scores, color=colors_all, alpha=0.85, width=0.6)
+                axes[0].axhline(60, color='#fbbf24', linestyle='--', linewidth=1.5, label='Pass (60)')
+                axes[0].set_title("Original scores", color='#e2e8f0', fontsize=9)
+                axes[0].legend(fontsize=7, facecolor='#0d1220', labelcolor='#94a3b8')
+                axes[1].bar(range(len(passing)), passing, color='#22c55e', alpha=0.85, width=0.6)
+                axes[1].set_title("After .filter(s >= 60)", color='#e2e8f0', fontsize=9)
+                plt.tight_layout()
+                st.pyplot(fig); plt.close()
+
+            elif content["viz_type"] == "async":
+                fig, ax = plt.subplots(figsize=(5, 4))
+                fig.patch.set_facecolor('#0d1220')
+                ax.set_facecolor('#0d1220')
+                ax.set_xlim(0, 10); ax.set_ylim(0, 6); ax.axis('off')
+                ax.set_title("Async/Await Execution Flow", color='#e2e8f0', fontsize=10)
+                steps = [
+                    (1, 5.2, "Call async function", '#0ea5e9'),
+                    (1, 4.0, "Hit await — pause here", '#fbbf24'),
+                    (1, 2.8, "Other code runs...", '#94a3b8'),
+                    (1, 1.6, "Promise resolves ✓", '#22c55e'),
+                    (1, 0.4, "Resume after await", '#a78bfa'),
+                ]
+                for x, y, label, color in steps:
+                    ax.add_patch(plt.Rectangle((x, y-0.35), 7, 0.7, color=color, alpha=0.2, zorder=1))
+                    ax.add_patch(plt.Rectangle((x, y-0.35), 0.08, 0.7, color=color, alpha=0.9, zorder=2))
+                    ax.text(x+0.3, y, label, color=color, fontsize=10, va='center')
+                for i in range(len(steps)-1):
+                    ax.annotate("", xy=(0.5, steps[i+1][1]+0.35),
+                               xytext=(0.5, steps[i][1]-0.35),
+                               arrowprops=dict(arrowstyle="->", color='#334155', lw=1.5))
+                plt.tight_layout()
+                st.pyplot(fig); plt.close()
+
+            elif content["viz_type"] == "class":
+                fig, ax = plt.subplots(figsize=(5, 4))
+                fig.patch.set_facecolor('#0d1220')
+                ax.set_facecolor('#0d1220')
+                ax.set_xlim(0, 10); ax.set_ylim(0, 7); ax.axis('off')
+                ax.set_title("Class Inheritance Chain", color='#e2e8f0', fontsize=10)
+                boxes = [
+                    (2, 5.5, 6, 1.0, "Animal (parent class)", '#0ea5e9'),
+                    (2, 3.5, 6, 1.0, "Dog extends Animal", '#a78bfa'),
+                    (1, 1.2, 3.5, 0.9, "rex = new Dog('Rex')", '#22c55e'),
+                    (5.5, 1.2, 3.5, 0.9, "rex.speak()\nrex.fetch()", '#fbbf24'),
+                ]
+                for x, y, w, h, label, color in boxes:
+                    ax.add_patch(plt.FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0.05",
+                                facecolor=color+'33', edgecolor=color, linewidth=1.5))
+                    ax.text(x+w/2, y+h/2, label, ha='center', va='center',
+                           color=color, fontsize=8.5, fontweight='bold')
+                ax.annotate("", xy=(5, 4.5), xytext=(5, 5.5),
+                           arrowprops=dict(arrowstyle="->", color='#334155', lw=2))
+                ax.text(5.1, 5.05, "extends", color='#64748b', fontsize=8)
+                ax.annotate("", xy=(2.75, 2.1), xytext=(5, 3.5),
+                           arrowprops=dict(arrowstyle="->", color='#334155', lw=1.5))
+                ax.annotate("", xy=(7.25, 2.1), xytext=(5, 3.5),
+                           arrowprops=dict(arrowstyle="->", color='#334155', lw=1.5))
+                ax.text(4.5, 2.85, "new", color='#64748b', fontsize=8)
+                plt.tight_layout()
+                st.pyplot(fig); plt.close()
+
+            else:
+                event_flow = {
+                    "scope": ["Global Scope", "Function Scope", "Block Scope (let/const)", "Closure"],
+                    "dom":   ["document", "getElementById()", "querySelector()", "createElement()", "appendChild()"],
+                    "events":["User Action", "Event Fires", "addEventListener()", "Callback Runs", "DOM Updates"],
+                }
+                key = content["viz_type"]
+                items = event_flow.get(key, ["Step 1","Step 2","Step 3"])
+                colors_map = ['#0ea5e9','#a78bfa','#22c55e','#fbbf24','#f472b6']
+                fig, ax = plt.subplots(figsize=(5, 3.5))
+                fig.patch.set_facecolor('#0d1220')
+                ax.set_facecolor('#0d1220')
+                ax.set_xlim(0,1); ax.set_ylim(-0.5, len(items))
+                ax.axis('off')
+                for i, item in enumerate(items):
+                    y = len(items) - i - 1
+                    c = colors_map[i % len(colors_map)]
+                    ax.add_patch(plt.FancyBboxPatch((0.05, y-0.35), 0.9, 0.7,
+                                boxstyle="round,pad=0.02", facecolor=c+'22', edgecolor=c, lw=1.5))
+                    ax.text(0.5, y, item, ha='center', va='center', color=c, fontsize=10, fontweight='bold')
+                    if i < len(items)-1:
+                        ax.annotate("", xy=(0.5, y-0.35), xytext=(0.5, y-0.65),
+                                   arrowprops=dict(arrowstyle="->", color='#334155', lw=1.5))
+                ax.set_title(f"{js_topic} Flow", color='#e2e8f0', fontsize=10)
+                plt.tight_layout()
+                st.pyplot(fig); plt.close()
+
+            st.markdown("#### 🧩 Quick Quiz")
+            q, ans = content["quiz"]
+            st.markdown(f"<div style='color:#fcd34d;font-size:0.9rem;font-weight:600;margin-bottom:6px;'>❓ {q}</div>", unsafe_allow_html=True)
+            user_js = st.text_input("Your answer", key=f"jsquiz_{js_topic}", placeholder="Type keyword or method name...")
+            if user_js:
+                if user_js.strip().lower() in ans.lower() or ans.lower() in user_js.strip().lower():
+                    st.success(f"✅ Correct! `{ans}` is right.")
+                else:
+                    st.error(f"❌ Not quite. The answer is `{ans}`.")
+
+        # ── Score summary ──────────────────────────────────
+        st.markdown("---")
+        st.markdown("#### 📊 Topic Coverage")
+        topics_covered = ["Variables & Data Types","Functions & Scope","Arrays & Methods",
+                         "DOM Manipulation","Events & Callbacks","Promises & Async/Await","Objects & Classes"]
+        html_topics = ["Headings (h1–h6)","Paragraph & Text","Lists (ul / ol)",
+                      "Links & Images","Div & Semantic Tags","Forms & Inputs","Table"]
+        css_topics = ["Box Model","Typography","Colors & Backgrounds",
+                     "Flexbox Layout","CSS Selectors","Transitions & Animation"]
+        total = len(topics_covered) + len(html_topics) + len(css_topics)
+        cols = st.columns(3)
+        cols[0].metric("HTML Topics", f"7")
+        cols[1].metric("CSS Topics", f"6")
+        cols[2].metric("JS Topics", f"7")
