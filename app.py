@@ -11,50 +11,163 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap');
 
+/* ── GLOBAL FONT & BASE ── */
 html, body, [class*="css"] {
     font-family: 'Syne', sans-serif;
+    color: #e2e8f0 !important;
 }
 code, pre, .stCode {
     font-family: 'JetBrains Mono', monospace !important;
 }
 
-/* Dark base */
+/* ── BACKGROUNDS ── */
 .stApp { background-color: #080c14; }
-section[data-testid="stSidebar"] { background-color: #0d1220; border-right: 1px solid #1e2d45; }
+section[data-testid="stSidebar"] {
+    background-color: #0d1220 !important;
+    border-right: 1px solid #1e2d45;
+}
+/* Force sidebar inner content background */
+section[data-testid="stSidebar"] > div {
+    background-color: #0d1220 !important;
+}
 
-/* Hide default streamlit elements */
+/* ── HIDE STREAMLIT CHROME ── */
 #MainMenu, footer, header { visibility: hidden; }
 
-/* Sidebar level cards */
-.level-card {
-    padding: 10px 14px;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    cursor: pointer;
-    border: 1px solid transparent;
-    transition: all 0.2s;
+/* ── SIDEBAR TEXT — force all text bright ── */
+section[data-testid="stSidebar"] * {
+    color: #e2e8f0 !important;
 }
-.level-card:hover { border-color: #00d4ff33; }
-
-/* Page title */
-.page-hero {
-    text-align: center;
-    padding: 40px 0 20px 0;
+/* Radio button labels */
+section[data-testid="stSidebar"] .stRadio label,
+section[data-testid="stSidebar"] .stRadio span,
+section[data-testid="stSidebar"] .stRadio p {
+    color: #e2e8f0 !important;
+    font-size: 0.95rem !important;
+    font-weight: 500 !important;
 }
-.page-hero h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, #00d4ff, #a78bfa, #f472b6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 0.3rem;
-}
-.page-hero p {
-    color: #64748b;
-    font-size: 1.1rem;
+/* Selected radio option highlight */
+section[data-testid="stSidebar"] .stRadio [data-checked="true"] span,
+section[data-testid="stSidebar"] .stRadio [aria-checked="true"] span {
+    color: #00d4ff !important;
+    font-weight: 700 !important;
 }
 
-/* Tool containers */
+/* ── MAIN CONTENT TEXT ── */
+.stApp p, .stApp span, .stApp div,
+.stApp label, .stApp li {
+    color: #e2e8f0;
+}
+h1, h2, h3, h4, h5, h6 { color: #f1f5f9 !important; }
+
+/* ── METRIC WIDGET — fix invisible label/value ── */
+[data-testid="stMetric"] {
+    background: #0d1220;
+    border: 1px solid #1e2d45;
+    border-radius: 10px;
+    padding: 14px 16px;
+}
+[data-testid="stMetricLabel"] p,
+[data-testid="stMetricLabel"] span,
+[data-testid="stMetricLabel"] {
+    color: #94a3b8 !important;
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+}
+[data-testid="stMetricValue"],
+[data-testid="stMetricValue"] *  {
+    color: #00d4ff !important;
+    font-size: 1.8rem !important;
+    font-weight: 800 !important;
+}
+
+/* ── SELECTBOX ── */
+.stSelectbox label, .stSelectbox p { color: #e2e8f0 !important; }
+.stSelectbox > div > div {
+    background: #0d1220 !important;
+    border-color: #1e2d45 !important;
+    color: #e2e8f0 !important;
+}
+.stSelectbox > div > div > div { color: #e2e8f0 !important; }
+
+/* ── SLIDER ── */
+.stSlider label, .stSlider p { color: #e2e8f0 !important; }
+.stSlider [data-testid="stTickBarMin"],
+.stSlider [data-testid="stTickBarMax"] { color: #64748b !important; }
+
+/* ── CHECKBOX ── */
+.stCheckbox label, .stCheckbox span, .stCheckbox p { color: #e2e8f0 !important; }
+
+/* ── MULTISELECT ── */
+.stMultiSelect label, .stMultiSelect p { color: #e2e8f0 !important; }
+.stMultiSelect > div > div { background: #0d1220 !important; border-color: #1e2d45 !important; }
+.stMultiSelect span { color: #e2e8f0 !important; }
+
+/* ── TEXT INPUT ── */
+.stTextInput label, .stTextInput p { color: #e2e8f0 !important; }
+.stTextInput input {
+    background: #0d1220 !important;
+    border-color: #1e2d45 !important;
+    color: #e2e8f0 !important;
+}
+
+/* ── TEXT AREA ── */
+.stTextArea label, .stTextArea p { color: #e2e8f0 !important; }
+.stTextArea textarea {
+    background: #0d1220 !important;
+    border-color: #1e2d45 !important;
+    color: #e2e8f0 !important;
+}
+
+/* ── DATAFRAME ── */
+.stDataFrame { border-color: #1e2d45 !important; }
+[data-testid="stDataFrameResizable"] { color: #e2e8f0 !important; }
+
+/* ── BUTTONS ── */
+.stButton > button {
+    background: linear-gradient(135deg, #0ea5e9, #6366f1) !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-family: 'Syne', sans-serif !important;
+    font-weight: 600 !important;
+    padding: 0.5rem 1.5rem !important;
+    transition: opacity 0.2s !important;
+}
+.stButton > button:hover { opacity: 0.85 !important; }
+.stButton > button p { color: #ffffff !important; }
+
+/* ── ALERT / INFO BOXES ── */
+.stInfo, .stInfo * { color: #93c5fd !important; }
+.stSuccess, .stSuccess * { color: #86efac !important; }
+.stWarning, .stWarning * { color: #fcd34d !important; }
+.stError, .stError * { color: #fca5a5 !important; }
+.stInfo { background: #0d1a2e !important; border-color: #0ea5e955 !important; }
+.stSuccess { background: #0d2e1a !important; border-color: #22c55e55 !important; }
+.stWarning { background: #2e1f0d !important; border-color: #f59e0b55 !important; }
+.stError { background: #2e0d0d !important; border-color: #ef444455 !important; }
+
+/* ── CODE BLOCKS ── */
+.stCodeBlock, pre, code {
+    background: #0d1220 !important;
+    color: #7dd3fc !important;
+    border: 1px solid #1e2d45 !important;
+}
+
+/* ── CONCEPT BOX (custom HTML) ── */
+.concept-box {
+    background: #0d1220;
+    border: 1px solid #1e2d45;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+}
+.concept-box h4 { color: #00d4ff !important; margin-top: 0; }
+.concept-box p { color: #cbd5e1 !important; line-height: 1.6; }
+
+/* ── TOOL HEADER ── */
 .tool-header {
     display: flex;
     align-items: center;
@@ -65,40 +178,15 @@ section[data-testid="stSidebar"] { background-color: #0d1220; border-right: 1px 
 }
 .tool-badge {
     background: linear-gradient(135deg, #0ea5e9, #6366f1);
-    color: white;
+    color: #ffffff !important;
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.05em;
 }
-.concept-box {
-    background: #0d1220;
-    border: 1px solid #1e2d45;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 16px;
-}
-.concept-box h4 { color: #00d4ff; margin-top: 0; }
-.concept-box p { color: #94a3b8; line-height: 1.6; }
 
-/* Neuron styles for L1 */
-.neuron-row { display: flex; justify-content: center; gap: 20px; margin: 10px 0; }
-
-/* Metric cards */
-.metric-row { display: flex; gap: 12px; margin: 16px 0; }
-.metric-card {
-    flex: 1;
-    background: #0d1220;
-    border: 1px solid #1e2d45;
-    border-radius: 10px;
-    padding: 16px;
-    text-align: center;
-}
-.metric-card .val { font-size: 1.8rem; font-weight: 800; color: #00d4ff; }
-.metric-card .lbl { font-size: 0.75rem; color: #64748b; margin-top: 4px; }
-
-/* Step pipeline */
+/* ── PIPELINE STEPS ── */
 .pipeline { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 16px 0; }
 .pipe-step {
     background: #0d1220;
@@ -106,35 +194,17 @@ section[data-testid="stSidebar"] { background-color: #0d1220; border-right: 1px 
     border-radius: 8px;
     padding: 10px 16px;
     font-size: 0.85rem;
-    color: #e2e8f0;
-    position: relative;
+    color: #cbd5e1 !important;
 }
-.pipe-step.active { border-color: #00d4ff; color: #00d4ff; box-shadow: 0 0 12px #00d4ff22; }
-.pipe-arrow { color: #334155; font-size: 1.2rem; }
-
-/* Buttons */
-.stButton > button {
-    background: linear-gradient(135deg, #0ea5e9, #6366f1) !important;
-    color: white !important;
-    border: none !important;
-    border-radius: 8px !important;
-    font-family: 'Syne', sans-serif !important;
-    font-weight: 600 !important;
-    padding: 0.5rem 1.5rem !important;
-    transition: opacity 0.2s !important;
+.pipe-step.active {
+    border-color: #00d4ff;
+    color: #00d4ff !important;
+    box-shadow: 0 0 12px #00d4ff22;
 }
-.stButton > button:hover { opacity: 0.85 !important; }
+.pipe-arrow { color: #475569 !important; font-size: 1.2rem; }
 
-/* Sliders */
-.stSlider > div > div > div { background: #00d4ff !important; }
-
-/* Selectbox */
-.stSelectbox > div > div { background: #0d1220 !important; border-color: #1e2d45 !important; color: #e2e8f0 !important; }
-
-/* Info boxes */
-.stInfo { background: #0d1a2e !important; border-color: #0ea5e933 !important; }
-.stSuccess { background: #0d2e1a !important; border-color: #22c55e33 !important; }
-.stWarning { background: #2e1f0d !important; border-color: #f59e0b33 !important; }
+/* ── SECTION HEADERS (st.markdown "####") ── */
+.stMarkdown h4 { color: #e2e8f0 !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -189,7 +259,7 @@ if level_code == "L1":
     st.markdown("""
     <div class='concept-box'>
         <h4>What is a Neural Network?</h4>
-        <p>A neural network learns a <b>decision boundary</b> — an invisible line that separates different classes.
+        <p>A neural network learns a <b>decision boundary</b> an invisible line that separates different classes.
         Adjust the settings below and watch how the network learns to tell two groups apart.
         More hidden neurons = more complex boundary it can draw.</p>
     </div>
@@ -210,7 +280,7 @@ if level_code == "L1":
         st.markdown("""
         <div class='concept-box' style='margin-top:16px;'>
             <h4>💡 Try This</h4>
-            <p>Set dataset to <b>Circles</b> with only <b>2 neurons</b> — it can't separate them!
+            <p>Set dataset to <b>Circles</b> with only <b>2 neurons</b> it can't separate them!
             Now increase to <b>8</b> and watch the boundary curve.</p>
         </div>
         """, unsafe_allow_html=True)
@@ -313,7 +383,7 @@ elif level_code == "L2":
     <div class='concept-box'>
         <h4>Why Does Data Quality Matter?</h4>
         <p>AI models are only as good as the data they learn from. If training data is <b>imbalanced</b>,
-        <b>noisy</b>, or <b>unrepresentative</b>, the model will be biased — even if accuracy looks high.
+        <b>noisy</b>, or <b>unrepresentative</b>, the model will be biased even if accuracy looks high.
         Experiment below to see how bad data creates biased AI.</p>
     </div>
     """, unsafe_allow_html=True)
@@ -328,13 +398,13 @@ elif level_code == "L2":
                                 help="Percentage of labels randomly flipped (bad labelling)")
         n_total = st.slider("Dataset Size", 100, 1000, 300)
         feature_bias = st.slider("Feature Bias", 0.0, 2.0, 0.0,
-                                 help="Shift Class A features — simulates demographic skew")
+                                 help="Shift Class A features simulates demographic skew")
 
         st.markdown("""
         <div class='concept-box' style='margin-top:16px;'>
             <h4>💡 Key Insight</h4>
             <p>Push <b>Class Imbalance to 90%</b>. The accuracy stays high but the model
-            just predicts Class A for everything — Class B is completely ignored!</p>
+            just predicts Class A for everything Class B is completely ignored!</p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -394,7 +464,7 @@ elif level_code == "L2":
 
         bias_gap = abs(acc_a - acc_b)
         if bias_gap > 0.3:
-            st.error(f"⚠️ High bias detected! Class accuracy gap: {bias_gap:.0%} — your model discriminates between groups.")
+            st.error(f"⚠️ High bias detected! Class accuracy gap: {bias_gap:.0%} your model discriminates between groups.")
         elif bias_gap > 0.1:
             st.warning(f"⚠️ Moderate bias. Accuracy gap between classes: {bias_gap:.0%}")
         else:
@@ -425,7 +495,7 @@ elif level_code == "L3":
     <div class='concept-box'>
         <h4>What Do CNN Filters Actually See?</h4>
         <p>Convolutional Neural Networks use <b>filters (kernels)</b> that slide across an image
-        looking for specific patterns — edges, corners, textures. Each filter produces a
+        looking for specific patterns edges, corners, textures. Each filter produces a
         <b>feature map</b> showing where that pattern appears. This is how CNNs "understand" images.</p>
     </div>
     """, unsafe_allow_html=True)
@@ -450,7 +520,7 @@ elif level_code == "L3":
         <div class='concept-box' style='margin-top:16px;'>
             <h4>💡 Try This</h4>
             <p>Switch between <b>Sobel X</b> and <b>Sobel Y</b>. One detects vertical edges,
-            the other horizontal — together they form the full edge map used in early CNN layers.</p>
+            the other horizontal together they form the full edge map used in early CNN layers.</p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -650,7 +720,7 @@ elif level_code == "L5":
     <div class='concept-box'>
         <h4>What is Retrieval-Augmented Generation (RAG)?</h4>
         <p>RAG solves a core LLM problem: models don't know facts outside their training data.
-        RAG adds a <b>retrieval step</b> — before generating, the system searches a knowledge base
+        RAG adds a <b>retrieval step</b> before generating, the system searches a knowledge base
         for relevant documents and adds them to the prompt. This grounds the model in real facts.</p>
     </div>
     """, unsafe_allow_html=True)
