@@ -34,6 +34,36 @@ section[data-testid="stSidebar"] > div {
 /* ── HIDE STREAMLIT CHROME ── */
 #MainMenu, footer, header { visibility: hidden; }
 
+/* ── SIDEBAR TOGGLE BUTTON — always visible ── */
+/* The collapse arrow */
+[data-testid="collapsedControl"] {
+    background-color: #0ea5e9 !important;
+    border-radius: 0 8px 8px 0 !important;
+    color: #ffffff !important;
+    width: 24px !important;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.4) !important;
+}
+[data-testid="collapsedControl"] svg {
+    fill: #ffffff !important;
+    color: #ffffff !important;
+}
+[data-testid="collapsedControl"]:hover {
+    background-color: #0284c7 !important;
+}
+/* The expand/collapse arrow inside the open sidebar */
+[data-testid="baseButton-headerNoPadding"] {
+    color: #e2e8f0 !important;
+    background: #1e2d45 !important;
+    border-radius: 6px !important;
+}
+[data-testid="baseButton-headerNoPadding"]:hover {
+    background: #0ea5e9 !important;
+    color: #ffffff !important;
+}
+[data-testid="baseButton-headerNoPadding"] svg {
+    fill: #e2e8f0 !important;
+}
+
 /* ── SIDEBAR TEXT — force all text bright ── */
 section[data-testid="stSidebar"] * {
     color: #e2e8f0 !important;
@@ -1468,7 +1498,7 @@ elif level_code == "L7":
                 st.markdown("""<div class='concept-box' style='margin-top:12px;'>
                 <h4>💡 Performance Tip</h4>
                 <p>Animate only <code>transform</code> and <code>opacity</code> for smooth 60fps animations.
-                Animating <code>width</code>, <code>height</code>, or <code>margin</code> forces layout recalculations — very slow.</p>
+                Animating <code>width</code>, <code>height</code>, or <code>margin</code> forces layout recalculations very slow.</p>
                 </div>""", unsafe_allow_html=True)
 
     # ── SUB-TOOL 3: JS Concepts Visualizer ──────────────────
@@ -1521,7 +1551,7 @@ console.log(`Hi, I'm ${name}, age ${age}`);""",
                 "viz_type": "table"
             },
             "Functions & Scope": {
-                "concept": "Functions are reusable blocks of code. <b>Scope</b> determines where variables are accessible. Variables declared inside a function are local to it — they can't be accessed outside.",
+                "concept": "Functions are reusable blocks of code. <b>Scope</b> determines where variables are accessible. Variables declared inside a function are local to it they can't be accessed outside.",
                 "code": """// Function declaration
 function greet(name) {
   const message = "Hello, " + name; // local scope
@@ -1566,7 +1596,7 @@ const sorted = [...scores].sort((a, b) => a - b);
                 "viz_type": "array"
             },
             "DOM Manipulation": {
-                "concept": "The DOM (Document Object Model) is the browser's live tree of HTML elements. JavaScript can <b>select</b>, <b>modify</b>, <b>create</b>, and <b>delete</b> elements dynamically — without reloading the page.",
+                "concept": "The DOM (Document Object Model) is the browser's live tree of HTML elements. JavaScript can <b>select</b>, <b>modify</b>, <b>create</b>, and <b>delete</b> elements dynamically without reloading the page.",
                 "code": """// Select elements
 const btn = document.getElementById("myBtn");
 const items = document.querySelectorAll(".item");
@@ -1591,7 +1621,7 @@ btn.classList.toggle("active");""",
                 "viz_type": "dom"
             },
             "Events & Callbacks": {
-                "concept": "Events are actions that happen in the browser — clicks, keypresses, form submissions. You <b>listen</b> for events with <code>addEventListener</code> and pass a <b>callback function</b> that runs when the event fires.",
+                "concept": "Events are actions that happen in the browser clicks, keypresses, form submissions. You <b>listen</b> for events with <code>addEventListener</code> and pass a <b>callback function</b> that runs when the event fires.",
                 "code": """const button = document.getElementById("btn");
 
 // Add event listener
@@ -1615,7 +1645,7 @@ document.addEventListener("keydown", (e) => {
             },
             "Promises & Async/Await": {
                 "concept": "JavaScript is <b>single-threaded</b> but handles async operations (fetching data, timers) using Promises. <code>async/await</code> is modern syntax that makes async code read like synchronous code.",
-                "code": """// Old way — callback hell
+                "code": """// Old way callback hell
 fetch(url, function(data) {
   parse(data, function(parsed) {
     display(parsed);
