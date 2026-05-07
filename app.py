@@ -32,36 +32,56 @@ section[data-testid="stSidebar"] > div {
 }
 
 /* ── HIDE STREAMLIT CHROME ── */
-#MainMenu, footer, header { visibility: hidden; }
+#MainMenu, footer { visibility: hidden; }
+/* Keep header visible so the sidebar toggle button works */
+header { visibility: visible !important; }
+header * { visibility: visible !important; }
+/* But hide the inner deploy/share buttons we don't want */
+[data-testid="stToolbar"] { visibility: hidden !important; }
 
 /* ── SIDEBAR TOGGLE BUTTON — always visible ── */
-/* The collapse arrow */
+/* Collapsed state: the arrow tab on the left edge */
 [data-testid="collapsedControl"] {
+    visibility: visible !important;
+    display: flex !important;
     background-color: #0ea5e9 !important;
-    border-radius: 0 8px 8px 0 !important;
-    color: #ffffff !important;
-    width: 24px !important;
-    box-shadow: 2px 0 8px rgba(0,0,0,0.4) !important;
+    border-radius: 0 10px 10px 0 !important;
+    width: 28px !important;
+    min-height: 48px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 3px 0 12px rgba(0,212,255,0.3) !important;
+    z-index: 9999 !important;
+    position: fixed !important;
+    top: 50% !important;
+    left: 0 !important;
+    transform: translateY(-50%) !important;
+    cursor: pointer !important;
 }
-[data-testid="collapsedControl"] svg {
+[data-testid="collapsedControl"] svg,
+[data-testid="collapsedControl"] * {
     fill: #ffffff !important;
     color: #ffffff !important;
+    visibility: visible !important;
 }
 [data-testid="collapsedControl"]:hover {
     background-color: #0284c7 !important;
+    width: 32px !important;
 }
-/* The expand/collapse arrow inside the open sidebar */
+/* Open state: collapse arrow inside sidebar */
 [data-testid="baseButton-headerNoPadding"] {
+    visibility: visible !important;
     color: #e2e8f0 !important;
     background: #1e2d45 !important;
     border-radius: 6px !important;
+    padding: 4px !important;
 }
 [data-testid="baseButton-headerNoPadding"]:hover {
     background: #0ea5e9 !important;
-    color: #ffffff !important;
 }
 [data-testid="baseButton-headerNoPadding"] svg {
     fill: #e2e8f0 !important;
+    visibility: visible !important;
 }
 
 /* ── SIDEBAR TEXT — force all text bright ── */
